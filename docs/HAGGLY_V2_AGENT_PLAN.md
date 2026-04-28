@@ -6,7 +6,9 @@ Last updated: 2026-04-28
 
 Haggly v2 should launch as a no-login app first.
 
-The MVP is a green-leaning, no-paywall AI negotiation chat app with a lightweight local dashboard. "Green" means visual direction and brand feel, not a sustainability claim.
+The MVP is a green-leaning, no-paywall agentic AI negotiation workspace with a lightweight local dashboard. "Green" means visual direction and brand feel, not a sustainability claim.
+
+Haggly v2 is its own product direction. It should not behave like the current `www.haggly.io` v1 static site or a simple script generator. The v2 assistant should act like a negotiation agent: diagnose leverage, identify missing context, ask useful follow-up questions, recommend the next move, and draft wording only when drafting is actually the next best step.
 
 Do not build account login, billing, Stripe, or a hidden member dashboard for the first v2 launch. Those can come after the chat experience proves useful.
 
@@ -17,9 +19,10 @@ The first useful version should let a visitor:
 1. Open Haggly without logging in.
 2. Choose buyer or seller mode.
 3. Describe the negotiation.
-4. Chat with an AI negotiation assistant.
-5. Copy suggested responses.
-6. See recent negotiation sessions in a local dashboard.
+4. Chat with a Haggly negotiation agent.
+5. Get a read on leverage, missing context, and next move.
+6. Copy suggested wording when the agent decides drafting is useful.
+7. See recent negotiation sessions in a local dashboard.
 
 Local browser storage is acceptable for MVP. If a user clears browser data, their history disappears.
 
@@ -57,6 +60,12 @@ Main current problems:
 - No tests.
 - `npm run lint` is defined but ESLint is not installed/configured.
 - Current styling is purple/blue, not the intended v2 direction.
+
+Important product boundary:
+
+- v1/current site: static, content-heavy, script/generator lineage.
+- v2/Haggly agent: interactive negotiation agent with memory, context gathering, and strategy-first behavior.
+- Use v1 and the old markdown scripts as source material only. Do not make v2 a wrapper around canned scripts.
 
 ## Build Strategy
 
@@ -267,13 +276,14 @@ Tasks:
 - Add message composer.
 - Add assistant/user message bubbles.
 - Add loading state.
-- Use mock AI responses first.
+- Use mock Haggly-agent responses first.
+- The mock assistant should diagnose and ask follow-up questions; it should not simply return canned Friendly/Firm/Casual scripts.
 - Preserve copy-to-clipboard behavior.
 
 Acceptance criteria:
 
 - User can send a message.
-- Assistant returns a mock response.
+- Assistant returns mock agent guidance with leverage read, missing context, and next move.
 - Messages stay visible in the current session.
 - No backend or API key required.
 
