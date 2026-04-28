@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import Surface from '../../components/ui/Surface'
+import { isApiChatEnabled, requestAssistantReply } from '../../lib/ai/chatClient'
 import { createInitialMessages, createMockAssistantReply } from './mockAssistant'
 import ChatComposer from './ChatComposer'
 import ChatMessage from './ChatMessage'
@@ -11,6 +12,7 @@ function ChatPanel({ conversation, mode, onConversationChange, onCopy }) {
   const [conversationStatus, setConversationStatus] = useState(() => conversation?.status ?? 'active')
   const [conversationCreatedAt, setConversationCreatedAt] = useState(() => conversation?.createdAt ?? Date.now())
   const [isReplying, setIsReplying] = useState(false)
+  const isApiMode = isApiChatEnabled()
 
   const publishMessages = (nextMessages, status = conversationStatus) => {
     const nextId = conversation?.id ?? conversationId
@@ -32,7 +34,7 @@ function ChatPanel({ conversation, mode, onConversationChange, onCopy }) {
     })
   }
 
-  const handleSend = (content) => {
+  const handleSend = async (content) => {
     const userMessage = {
       id: `user-${Date.now()}`,
       role: 'user',
@@ -44,13 +46,38 @@ function ChatPanel({ conversation, mode, onConversationChange, onCopy }) {
     publishMessages(messagesWithUser)
     setIsReplying(true)
 
-    setTimeout(() => {
+    if (!isApiMode) {
+      setTimeout(() => {
+        publishMessages([
+          ...messagesWithUser,
+          createMockAssistantReply({ mode: activeMode, message: content }),
+        ])
+        setIsReplying(false)
+      }, 450)
+      return
+    }
+
+    try {
+      const assistantReply = await requestAssistantReply({
+        mode: activeMode,
+        message: content,
+        messages: messagesWithUser,
+      })
+
+      publishMessages([...messagesWithUser, assistantReply])
+    } catch (error) {
       publishMessages([
         ...messagesWithUser,
-        createMockAssistantReply({ mode: activeMode, message: content }),
+        {
+          id: `assistant-error-${Date.now()}`,
+          role: 'assistant',
+          content: `I could not reach the Haggly model endpoint. ${error.message}`,
+          createdAt: Date.now(),
+        },
       ])
+    } finally {
       setIsReplying(false)
-    }, 450)
+    }
   }
 
   const handleStatusChange = (event) => {
@@ -62,7 +89,9 @@ function ChatPanel({ conversation, mode, onConversationChange, onCopy }) {
       <div className="flex items-start justify-between gap-4 border-b border-stone-200 px-4 py-3">
         <div>
           <p className="text-sm font-semibold text-stone-950">Negotiation chat</p>
-          <p className="mt-1 text-xs text-stone-500">Mock Haggly agent for now. No API key needed.</p>
+          <p className="mt-1 text-xs text-stone-500">
+            {isApiMode ? 'API-backed Haggly agent.' : 'Mock Haggly agent for now. No API key needed.'}
+          </p>
         </div>
         <label className="text-xs font-semibold text-stone-500">
           Status
@@ -90,7 +119,7 @@ function ChatPanel({ conversation, mode, onConversationChange, onCopy }) {
 
         {isReplying && (
           <div className="inline-flex rounded-full border border-primary-100 bg-white px-3 py-2 text-sm font-medium text-primary-800 shadow-sm shadow-stone-900/5">
-            Haggly is drafting...
+            Haggly is thinking...
           </div>
         )}
       </div>
