@@ -10,3 +10,5 @@ dist/
 coverage/
 AI_REVIEW_BRIEF.md
 .claude/
+test-results/
+playwright-report/
