@@ -8,17 +8,17 @@
 }
 
 ::-webkit-scrollbar-track {
-  background: #f1f1f1;
+  background: #f4f1ea;
   border-radius: 3px;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #c084fc;
+  background: #83d9a8;
   border-radius: 3px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #a855f7;
+  background: #17824d;
 }
 
 /* Smooth transitions */
@@ -29,8 +29,6 @@
 /* Better focus states */
 input:focus, button:focus {
   outline: none;
-  ring: 2px;
-  ring-color: #a855f7;
 }
 
 /* Toast animation */
@@ -55,7 +53,7 @@ input:focus, button:focus {
 
 /* Gradient text helper */
 .gradient-text {
-  background: linear-gradient(135deg, #a855f7 0%, #7c3aed 100%);
+  background: linear-gradient(135deg, #17824d 0%, #0d442c 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -68,7 +66,7 @@ input:focus, button:focus {
 
 .card-hover:hover {
   transform: translateY(-2px);
-  box-shadow: 0 10px 25px -5px rgba(147, 51, 234, 0.2);
+  box-shadow: 0 10px 25px -5px rgba(18, 103, 63, 0.18);
 }
 
 /* Input styling overrides */

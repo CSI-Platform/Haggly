@@ -1,4 +1,6 @@
 import { useState } from 'react'
+import { Check, Copy } from 'lucide-react'
+import Button from './ui/Button'
 
 function CopyButton({ text, onCopy }) {
   const [copied, setCopied] = useState(false)
@@ -35,33 +37,23 @@ function CopyButton({ text, onCopy }) {
   }
 
   return (
-    <button
+    <Button
       onClick={handleCopy}
-      className={`
-        flex items-center gap-2 px-4 py-2 rounded-lg font-medium text-sm
-        transition-all duration-200 active:scale-95
-        ${copied 
-          ? 'bg-green-100 text-green-700 border-2 border-green-200' 
-          : 'bg-primary-100 text-primary-700 border-2 border-primary-200 hover:bg-primary-200'
-        }
-      `}
+      variant={copied ? 'primary' : 'muted'}
+      size="sm"
     >
       {copied ? (
         <>
-          <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-          </svg>
+          <Check className="h-4 w-4" aria-hidden="true" />
           Copied!
         </>
       ) : (
         <>
-          <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3" />
-          </svg>
+          <Copy className="h-4 w-4" aria-hidden="true" />
           Copy
         </>
       )}
-    </button>
+    </Button>
   )
 }
 

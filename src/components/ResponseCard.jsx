@@ -1,24 +1,27 @@
 import CopyButton from './CopyButton'
 
-function ResponseCard({ tone, emoji, message, description, onCopy, delay = 0 }) {
+function ResponseCard({ tone, message, description, onCopy, delay = 0 }) {
   const toneColors = {
     friendly: {
-      bg: 'bg-emerald-50',
-      border: 'border-emerald-200',
-      badge: 'bg-emerald-100 text-emerald-700',
-      accent: 'text-emerald-600'
+      bg: 'bg-primary-50',
+      border: 'border-primary-100',
+      badge: 'bg-primary-100 text-primary-800',
+      accent: 'text-primary-700',
+      dot: 'bg-primary-500',
     },
     firm: {
       bg: 'bg-amber-50',
-      border: 'border-amber-200',
-      badge: 'bg-amber-100 text-amber-700',
-      accent: 'text-amber-600'
+      border: 'border-amber-100',
+      badge: 'bg-amber-100 text-amber-800',
+      accent: 'text-amber-800',
+      dot: 'bg-amber-500',
     },
     casual: {
-      bg: 'bg-sky-50',
-      border: 'border-sky-200',
-      badge: 'bg-sky-100 text-sky-700',
-      accent: 'text-sky-600'
+      bg: 'bg-stone-50',
+      border: 'border-stone-200',
+      badge: 'bg-stone-200 text-stone-800',
+      accent: 'text-stone-600',
+      dot: 'bg-stone-500',
     }
   }
 
@@ -27,30 +30,27 @@ function ResponseCard({ tone, emoji, message, description, onCopy, delay = 0 }) 
   return (
     <div 
       className={`
-        ${colors.bg} ${colors.border} border-2 rounded-2xl p-5 
+        ${colors.bg} ${colors.border} rounded-lg border p-5
         card-hover animate-slide-up
       `}
       style={{ animationDelay: `${delay}ms` }}
     >
-      {/* Header */}
       <div className="flex items-center justify-between mb-3">
         <div className="flex items-center gap-2">
-          <span className="text-xl">{emoji}</span>
-          <span className={`px-3 py-1 rounded-full text-sm font-semibold ${colors.badge}`}>
+          <span className={`h-2.5 w-2.5 rounded-full ${colors.dot}`} />
+          <span className={`rounded-full px-3 py-1 text-sm font-semibold ${colors.badge}`}>
             {tone}
           </span>
         </div>
         <CopyButton text={message} onCopy={onCopy} />
       </div>
 
-      {/* Message */}
-      <div className="bg-white/70 rounded-xl p-4 border border-white">
-        <p className="text-gray-800 leading-relaxed whitespace-pre-wrap">
+      <div className="border-l-2 border-current/20 pl-4">
+        <p className="text-stone-800 leading-relaxed whitespace-pre-wrap">
           {message}
         </p>
       </div>
 
-      {/* Description */}
       {description && (
         <p className={`mt-3 text-sm ${colors.accent}`}>
           {description}

@@ -7,18 +7,17 @@ export default {
   theme: {
     extend: {
       colors: {
-        // Fun purple palette
         primary: {
-          50: '#faf5ff',
-          100: '#f3e8ff',
-          200: '#e9d5ff',
-          300: '#d8b4fe',
-          400: '#c084fc',
-          500: '#a855f7',
-          600: '#9333ea',
-          700: '#7c3aed',
-          800: '#6b21a8',
-          900: '#581c87',
+          50: '#effcf4',
+          100: '#d9f7e4',
+          200: '#b7edcc',
+          300: '#83d9a8',
+          400: '#4fbe80',
+          500: '#259f5f',
+          600: '#17824d',
+          700: '#12673f',
+          800: '#105234',
+          900: '#0d442c',
         }
       },
       fontFamily: {
