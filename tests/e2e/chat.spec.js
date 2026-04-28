@@ -30,3 +30,22 @@ test('buyer can send a mock chat message and receive buying guidance', async ({ 
   await expect(page.getByText('Current read:')).toBeVisible()
   await expect(page.getByText('seller urgency')).toBeVisible()
 })
+
+test('local dashboard saves and reopens a chat session', async ({ page }) => {
+  await page.goto('/')
+
+  await page.getByRole('button', { name: /I'm selling/i }).click()
+  await page.getByLabel('Message Haggly').fill(
+    "I'm selling a camera for $500. They offered $350 and I can wait.",
+  )
+  await page.getByRole('button', { name: /^Send$/i }).click()
+  await expect(page.getByText('Current read:')).toBeVisible()
+
+  await page.getByRole('button', { name: /Back/i }).click()
+  await expect(page.getByText('Local dashboard')).toBeVisible()
+  await expect(page.getByText(/camera for \$500/i)).toBeVisible()
+
+  await page.getByRole('button', { name: /seller negotiation/i }).click()
+  await expect(page.getByText(/camera for \$500/i)).toBeVisible()
+  await expect(page.getByText('Current read:')).toBeVisible()
+})

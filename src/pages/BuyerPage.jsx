@@ -3,7 +3,7 @@ import BrandMark from '../components/BrandMark'
 import Button from '../components/ui/Button'
 import ChatPanel from '../features/chat/ChatPanel'
 
-function BuyerPage({ onBack, onCopy }) {
+function BuyerPage({ conversation, onBack, onConversationChange, onCopy }) {
   const upcomingTools = [
     { icon: Search, label: 'Question builder' },
     { icon: MessageSquareText, label: 'Response scripts' },
@@ -45,7 +45,12 @@ function BuyerPage({ onBack, onCopy }) {
           </div>
         </section>
 
-        <ChatPanel mode="buyer" onCopy={onCopy} />
+        <ChatPanel
+          conversation={conversation}
+          mode="buyer"
+          onConversationChange={onConversationChange}
+          onCopy={onCopy}
+        />
       </main>
     </div>
   )
