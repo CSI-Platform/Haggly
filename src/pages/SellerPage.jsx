@@ -5,7 +5,7 @@ import Button from '../components/ui/Button'
 import Surface from '../components/ui/Surface'
 import ChatPanel from '../features/chat/ChatPanel'
 
-function SellerPage({ toast, onBack, onCopy }) {
+function SellerPage({ conversation, toast, onBack, onConversationChange, onCopy }) {
   return (
     <div className="min-h-screen bg-[#f7faf5] px-4 py-6 text-stone-950 sm:px-6 lg:px-8">
       <Toast message={toast} />
@@ -43,7 +43,12 @@ function SellerPage({ toast, onBack, onCopy }) {
           </Surface>
         </section>
 
-        <ChatPanel mode="seller" onCopy={onCopy} />
+        <ChatPanel
+          conversation={conversation}
+          mode="seller"
+          onConversationChange={onConversationChange}
+          onCopy={onCopy}
+        />
       </main>
 
       <footer className="mx-auto max-w-5xl pb-6 text-sm text-stone-400">
