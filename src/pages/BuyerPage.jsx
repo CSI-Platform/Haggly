@@ -27,10 +27,10 @@ function BuyerPage({ onBack, onCopy }) {
             Buyer workspace
           </p>
           <h1 className="mt-3 text-4xl font-bold tracking-normal text-stone-950 sm:text-5xl">
-            Prepare the next buying move.
+            Let Haggly read the seller.
           </h1>
           <p className="mt-4 max-w-2xl text-lg leading-8 text-stone-600">
-            Ask what to say, what to check, or how to counter without sounding rushed.
+            Give it the listing, seller behavior, and your walk-away number before you make the next move.
           </p>
 
           <div className="mt-8 grid gap-3 sm:grid-cols-2">

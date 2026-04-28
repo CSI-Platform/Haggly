@@ -24,10 +24,10 @@ function SellerPage({ toast, onBack, onCopy }) {
             Seller workspace
           </p>
           <h1 className="mt-3 text-4xl font-bold tracking-normal text-stone-950 sm:text-5xl">
-            Turn an offer into a clear reply.
+            Let Haggly read the negotiation.
           </h1>
           <p className="mt-4 text-lg leading-8 text-stone-600">
-            Paste the offer, ask what to say next, and use the draft that fits your tone.
+            Share the situation and let the agent diagnose leverage before it suggests what to do next.
           </p>
 
           <Surface className="mt-8 p-4">
@@ -36,7 +36,7 @@ function SellerPage({ toast, onBack, onCopy }) {
               <div>
                 <p className="font-semibold text-primary-950">Try this</p>
                 <p className="mt-1 text-sm leading-6 text-stone-600">
-                  "I'm selling a gaming chair for $200. They offered $100. I would take $160. Make it firm but polite."
+                  "I'm selling a gaming chair for $200. They offered $100. I would take $160, but I don't want to seem desperate."
                 </p>
               </div>
             </div>

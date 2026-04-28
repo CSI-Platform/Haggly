@@ -32,7 +32,7 @@ function ChatPanel({ mode, onCopy }) {
     <Surface className="overflow-hidden">
       <div className="border-b border-stone-200 px-4 py-3">
         <p className="text-sm font-semibold text-stone-950">Negotiation chat</p>
-        <p className="mt-1 text-xs text-stone-500">Mock AI replies for now. No API key needed.</p>
+        <p className="mt-1 text-xs text-stone-500">Mock Haggly agent for now. No API key needed.</p>
       </div>
 
       <div className="max-h-[520px] min-h-[360px] space-y-4 overflow-y-auto bg-stone-50/70 p-4">

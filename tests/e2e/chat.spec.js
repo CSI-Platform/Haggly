@@ -1,6 +1,6 @@
 import { expect, test } from '@playwright/test'
 
-test('seller can send a mock chat message and receive a draft', async ({ page }) => {
+test('seller can send a mock chat message and receive agent guidance', async ({ page }) => {
   await page.goto('/')
 
   await page.getByRole('button', { name: /I'm selling/i }).click()
@@ -11,9 +11,9 @@ test('seller can send a mock chat message and receive a draft', async ({ page })
   )
   await page.getByRole('button', { name: /^Send$/i }).click()
 
-  await expect(page.getByText('Friendly:')).toBeVisible()
-  await expect(page.getByText('Firm:')).toBeVisible()
-  await expect(page.getByText('Casual:')).toBeVisible()
+  await expect(page.getByText('Current read:')).toBeVisible()
+  await expect(page.getByText('Missing context:')).toBeVisible()
+  await expect(page.getByText('Haggly check:')).toBeVisible()
 })
 
 test('buyer can send a mock chat message and receive buying guidance', async ({ page }) => {
@@ -27,5 +27,6 @@ test('buyer can send a mock chat message and receive buying guidance', async ({ 
   )
   await page.getByRole('button', { name: /^Send$/i }).click()
 
-  await expect(page.getByText('Start by confirming the useful details')).toBeVisible()
+  await expect(page.getByText('Current read:')).toBeVisible()
+  await expect(page.getByText('seller urgency')).toBeVisible()
 })

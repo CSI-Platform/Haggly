@@ -1,5 +1,3 @@
-import { generateMessages } from '../../utils/messageGenerator'
-
 function normalizeMode(mode) {
   return mode === 'buyer' ? 'buyer' : 'seller'
 }
@@ -12,7 +10,7 @@ export function createInitialMessages(mode) {
     {
       id: `${normalizedMode}-assistant-welcome`,
       role: 'assistant',
-      content: `Tell me what you're negotiating as the ${roleLabel}. Include the item, asking price, their offer, and the tone you want.`,
+      content: `I'm in ${roleLabel} mode. Give me the negotiation context, and I'll diagnose the leverage, identify what's missing, and recommend the next move before drafting anything.`,
       createdAt: Date.now(),
     },
   ]
@@ -57,10 +55,26 @@ function extractItem(text) {
   return 'item'
 }
 
-function formatGeneratedResponses(responses) {
-  return responses
-    .map((response) => `${response.tone}: ${response.message}`)
-    .join('\n\n')
+function getOfferRead(askingPrice, theirOffer) {
+  if (!askingPrice || !theirOffer) {
+    return 'I do not have enough price context yet.'
+  }
+
+  const percentOfAsk = Math.round((theirOffer / askingPrice) * 100)
+
+  if (percentOfAsk < 50) {
+    return `Their offer is about ${percentOfAsk}% of asking, so treat it as a low-commitment probe until they show seriousness.`
+  }
+
+  if (percentOfAsk < 75) {
+    return `Their offer is about ${percentOfAsk}% of asking, so there is room to counter without over-explaining.`
+  }
+
+  if (theirOffer < askingPrice) {
+    return `Their offer is about ${percentOfAsk}% of asking, so the deal is close enough to move toward logistics.`
+  }
+
+  return 'Their offer meets or beats asking, so protect the close and move to logistics.'
 }
 
 export function createMockAssistantReply({ mode, message }) {
@@ -73,25 +87,24 @@ export function createMockAssistantReply({ mode, message }) {
       id: `assistant-${Date.now()}`,
       role: 'assistant',
       content: [
-        `Start by confirming the useful details on the ${item}, then make the price conversation specific.`,
-        `Ask: "What condition issues should I know about, and is ${theirOffer ? `$${theirOffer}` : 'my offer'} realistic if I can move quickly?"`,
-        'Keep your next message calm, specific, and easy for the seller to answer.',
+        `Current read: you're evaluating the ${item}, but the real leverage depends on condition, seller urgency, and comparable listings.`,
+        `Missing context: how long it has been listed, whether there are defects, whether the seller has other buyers, and your walk-away number.`,
+        `Next move: ask one diagnostic question before negotiating price. If the answer creates leverage, then make a calm offer tied to that specific reason.`,
+        `Haggly check: do you want me to probe condition, seller urgency, or final offer strategy first?`,
       ].join('\n\n'),
       createdAt: Date.now(),
     }
   }
 
-  const responses = generateMessages({
-    item,
-    askingPrice,
-    theirOffer,
-    minimumPrice,
-  })
-
   return {
     id: `assistant-${Date.now()}`,
     role: 'assistant',
-    content: formatGeneratedResponses(responses),
+    content: [
+      `Current read: ${getOfferRead(askingPrice, theirOffer)}`,
+      `Missing context: how long the ${item} has been listed, whether you have other interest, how fast you want it gone, and whether ${minimumPrice ? `$${minimumPrice}` : 'your minimum'} is firm.`,
+      'Next move: do not eagerly justify the price. Test seriousness first, then counter once with a clean boundary and a simple pickup condition.',
+      'Haggly check: should we optimize for fastest sale, highest price, or least back-and-forth?',
+    ].join('\n\n'),
     createdAt: Date.now(),
   }
 }
