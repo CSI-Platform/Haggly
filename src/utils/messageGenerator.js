@@ -1,62 +1,14 @@
+import {
+  calculateCounterOffer,
+  classifyOffer,
+  formatPrice,
+} from '../features/negotiation/negotiationContext'
+
 /**
  * Message Generator for Haggly
- * 
- * Generates negotiation responses based on the offer type and user preferences.
- * Templates are based on real-world negotiation best practices.
+ *
+ * Generates deterministic fallback responses based on structured negotiation logic.
  */
-
-/**
- * Determine the type of offer based on the numbers
- */
-function getOfferType(askingPrice, theirOffer, minimumPrice) {
-  const offerPercentage = (theirOffer / askingPrice) * 100
-  
-  // If they offered at or above asking price - accept!
-  if (theirOffer >= askingPrice) {
-    return 'accept'
-  }
-  
-  // If minimum is set and offer meets it
-  if (minimumPrice && theirOffer >= minimumPrice) {
-    return 'acceptable'
-  }
-  
-  // If offer is less than 50% - lowball
-  if (offerPercentage < 50) {
-    return 'lowball'
-  }
-  
-  // If offer is between 50-75% - counter territory
-  if (offerPercentage < 75) {
-    return 'counter'
-  }
-  
-  // If offer is 75%+ - close, could accept or counter slightly
-  return 'close'
-}
-
-/**
- * Calculate a smart counter offer
- */
-function getCounterOffer(askingPrice, theirOffer, minimumPrice) {
-  // If minimum is set, counter halfway between their offer and asking (but not below minimum)
-  if (minimumPrice) {
-    const midpoint = Math.round((theirOffer + askingPrice) / 2)
-    return Math.max(midpoint, minimumPrice)
-  }
-  
-  // Default: counter at 85-90% of asking or midpoint, whichever is higher
-  const midpoint = Math.round((theirOffer + askingPrice) / 2)
-  const eightyFive = Math.round(askingPrice * 0.85)
-  return Math.max(midpoint, eightyFive)
-}
-
-/**
- * Format currency nicely
- */
-function formatPrice(price) {
-  return price % 1 === 0 ? `$${price}` : `$${price.toFixed(2)}`
-}
 
 /**
  * Message templates organized by offer type and tone
@@ -157,8 +109,8 @@ const templates = {
  * Generate messages for all three tones
  */
 export function generateMessages({ item, askingPrice, theirOffer, minimumPrice }) {
-  const offerType = getOfferType(askingPrice, theirOffer, minimumPrice)
-  const counterOffer = getCounterOffer(askingPrice, theirOffer, minimumPrice)
+  const offerType = classifyOffer({ askingPrice, theirOffer, minimumPrice })
+  const counterOffer = calculateCounterOffer({ askingPrice, theirOffer, minimumPrice })
   
   const replacements = {
     '{item}': item,
