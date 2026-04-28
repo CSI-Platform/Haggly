@@ -34,6 +34,7 @@ Local browser storage is acceptable for MVP. If a user clears browser data, thei
 - Marketplace URL scraping
 - Screenshot/image extraction
 - Replacing the live `www.haggly.io` site immediately
+- TypeScript migration (revisit at Issue 006 if the negotiation context object grows past ~5 fields)
 
 ## Current Repo State
 
@@ -294,7 +295,7 @@ Tasks:
 
 - Save conversations to `localStorage`.
 - Show recent conversations.
-- Support status values: `active`, `accepted`, `declined`, `archived`.
+- Support status values: `active`, `accepted`, `declined`, `expired`.
 - Let user reopen a conversation.
 - Let user clear local history.
 
@@ -371,14 +372,14 @@ Goal: add the first backend slice.
 
 Owned files:
 
-- new server/API route files depending on chosen stack
+- new `api/chat.js` (Vercel Function)
 - `.env.example`
 - `src/lib/ai/*`
 - affected chat feature files
 
-Decision needed first:
+Stack (resolved 2026-04-28):
 
-- Keep Vite and add a serverless API setup, or migrate to Next.js before this issue.
+- Stay on Vite. The route ships as a Vercel Function at `/api/chat`. No Next.js migration for v2.
 
 Tasks:
 
@@ -401,15 +402,16 @@ Suggested agent:
 
 ## Stack Decision
 
-Do not migrate to Next.js until Issues 001-005 are done unless a specific backend need forces it.
+Resolved 2026-04-28: stay on Vite for the entire v2 launch. The real AI API route (Issue 008) ships as a Vercel Function under `/api/`, not as a Next.js route handler.
 
-Reason:
+Reasons:
 
-- Current Vite app builds and deploys.
-- No-login MVP can prove the UX before auth/database.
-- A premature framework migration increases risk before the product shape is clear.
+- Vite app already builds and deploys.
+- No-login MVP proves UX before infra.
+- Vercel Functions cover the one server route v2 needs.
+- A framework migration mid-MVP is risk without payoff.
 
-Revisit Next.js before Issue 008. If the API route and deployment story become awkward, migrate then.
+Revisit Next.js only post-launch, if dashboard pages need server rendering or the API surface grows beyond a couple of routes.
 
 ## API Model Recommendation
 
@@ -420,11 +422,12 @@ The app code should hide the provider behind `src/lib/ai/*` or equivalent server
 ## Deployment Plan
 
 1. Keep `www.haggly.io` pointed at the current live v1 site.
-2. Deploy v2 to a Vercel preview URL.
+2. Deploy v2 to a Vercel preview URL, **password-gated** (Vercel password protection or basic-auth edge middleware) so the AI endpoint is not exposed to the public internet during private testing.
 3. Test no-login chat and dashboard privately.
 4. Run a content/SEO audit of the current live site.
 5. Decide whether v2 replaces the homepage or launches under a path/subdomain first.
-6. Cut over only after rollback is clear.
+6. Before opening to public traffic, file a hardening issue: rate limit, daily spend cap, and abuse logging on `/api/chat`.
+7. Cut over only after rollback is clear.
 
 ## Copy-Paste Prompt For Agents
 
