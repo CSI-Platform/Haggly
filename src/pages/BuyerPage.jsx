@@ -1,56 +1,47 @@
+import { ArrowLeft, BadgeQuestionMark, Car, MessageSquareText, Search } from 'lucide-react'
+import BrandMark from '../components/BrandMark'
+import Button from '../components/ui/Button'
+
 function BuyerPage({ onBack }) {
+  const upcomingTools = [
+    { icon: Search, label: 'Question builder' },
+    { icon: MessageSquareText, label: 'Response scripts' },
+    { icon: BadgeQuestionMark, label: 'Deal check' },
+    { icon: Car, label: 'Car buying mode' },
+  ]
+
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-blue-50">
-      <header className="pt-8 pb-6 px-4">
-        <div className="max-w-lg mx-auto text-center">
-          <div className="flex items-center justify-center gap-3 mb-4">
-            <button
-              onClick={onBack}
-              className="absolute left-4 top-8 text-blue-600 hover:text-blue-700 text-sm font-medium"
-            >
-              ← Back
-            </button>
-            <div className="w-12 h-12 bg-gradient-to-br from-blue-500 to-blue-700 rounded-xl flex items-center justify-center shadow-lg shadow-blue-500/30">
-              <span className="text-2xl">🛒</span>
-            </div>
-            <h1 className="text-4xl font-bold bg-gradient-to-r from-blue-600 to-blue-700 bg-clip-text text-transparent">Haggly</h1>
-          </div>
-          <p className="text-gray-600 text-lg">
-            Buyer Tools - Coming Soon!
-          </p>
-        </div>
+    <div className="min-h-screen bg-[#f7faf5] px-4 py-6 text-stone-950 sm:px-6 lg:px-8">
+      <header className="mx-auto flex max-w-5xl items-center justify-between">
+        <BrandMark compact />
+        <Button onClick={onBack} variant="ghost" size="sm">
+          <ArrowLeft className="h-4 w-4" aria-hidden="true" />
+          Back
+        </Button>
       </header>
 
-      <main className="px-4 pb-12">
-        <div className="max-w-lg mx-auto">
-          <div className="bg-white rounded-2xl shadow-xl shadow-gray-200/50 p-8 text-center">
-            <div className="text-6xl mb-6">🚧</div>
-            <h2 className="text-2xl font-bold text-gray-800 mb-4">Coming Very Soon!</h2>
-            <p className="text-gray-600 mb-6">
-              We're building amazing buyer tools including:
-            </p>
-            <ul className="text-left text-gray-600 space-y-2 mb-8">
-              <li className="flex items-center gap-3">
-                <span className="text-green-500">✓</span>
-                Strategic questioning techniques
-              </li>
-              <li className="flex items-center gap-3">
-                <span className="text-green-500">✓</span>
-                Negotiation scripts for different scenarios
-              </li>
-              <li className="flex items-center gap-3">
-                <span className="text-green-500">✓</span>
-                "Guard down" moment detection
-              </li>
-              <li className="flex items-center gap-3">
-                <span className="text-green-500">✓</span>
-                Car buying specific strategies
-              </li>
-            </ul>
-            <p className="text-sm text-gray-500">
-              For now, try our seller tools or check back soon!
-            </p>
-          </div>
+      <main className="mx-auto max-w-3xl py-10">
+        <div className="mb-6">
+          <p className="text-sm font-semibold uppercase tracking-[0.18em] text-primary-700">
+            Buyer workspace
+          </p>
+          <h1 className="mt-3 text-4xl font-bold tracking-normal text-stone-950 sm:text-5xl">
+            Buyer tools are next in line.
+          </h1>
+          <p className="mt-4 max-w-2xl text-lg leading-8 text-stone-600">
+            This screen is ready for the buyer chat flow once the mock chat layer is added.
+          </p>
+        </div>
+
+        <div className="grid gap-3 sm:grid-cols-2">
+          {upcomingTools.map(({ icon: Icon, label }) => (
+            <div key={label} className="flex items-center gap-3 rounded-lg border border-stone-200 bg-white p-4 shadow-sm shadow-stone-900/5">
+              <span className="inline-flex h-10 w-10 items-center justify-center rounded-lg bg-primary-100 text-primary-800">
+                <Icon className="h-5 w-5" aria-hidden="true" />
+              </span>
+              <span className="font-semibold text-stone-800">{label}</span>
+            </div>
+          ))}
         </div>
       </main>
     </div>

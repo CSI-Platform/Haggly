@@ -1,4 +1,6 @@
 import { useState } from 'react'
+import { LoaderCircle, Sparkles } from 'lucide-react'
+import Button from './ui/Button'
 
 function InputForm({ onGenerate, isGenerating }) {
   const [formData, setFormData] = useState({
@@ -59,23 +61,22 @@ function InputForm({ onGenerate, isGenerating }) {
   }
 
   const inputClasses = (fieldName) => `
-    w-full px-4 py-3 rounded-xl border-2 transition-all duration-200
+    w-full rounded-lg border px-4 py-3 transition-all duration-200
     ${errors[fieldName] 
       ? 'border-red-300 bg-red-50 focus:border-red-500 focus:ring-red-500/20' 
-      : 'border-gray-200 bg-gray-50 focus:border-primary-500 focus:bg-white focus:ring-primary-500/20'
+      : 'border-stone-200 bg-stone-50 focus:border-primary-500 focus:bg-white focus:ring-primary-500/20'
     }
     focus:ring-4 focus:outline-none
-    placeholder:text-gray-400
+    placeholder:text-stone-400
   `
 
-  const labelClasses = "block text-sm font-medium text-gray-700 mb-1.5"
+  const labelClasses = "block text-sm font-semibold text-stone-700 mb-1.5"
 
   return (
     <form onSubmit={handleSubmit} className="space-y-5">
-      {/* Item Name */}
       <div>
         <label htmlFor="item" className={labelClasses}>
-          What are you selling? 📦
+          What are you selling?
         </label>
         <input
           type="text"
@@ -88,19 +89,17 @@ function InputForm({ onGenerate, isGenerating }) {
           autoComplete="off"
         />
         {errors.item && (
-          <p className="text-red-500 text-sm mt-1">{errors.item}</p>
+          <p className="text-red-600 text-sm mt-1">{errors.item}</p>
         )}
       </div>
 
-      {/* Price Inputs Grid */}
-      <div className="grid grid-cols-2 gap-4">
-        {/* Asking Price */}
+      <div className="grid gap-4 sm:grid-cols-2">
         <div>
           <label htmlFor="askingPrice" className={labelClasses}>
-            Your asking price 💰
+            Your asking price
           </label>
           <div className="relative">
-            <span className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400 font-medium">
+            <span className="absolute left-4 top-1/2 transform -translate-y-1/2 text-stone-400 font-medium">
               $
             </span>
             <input
@@ -116,17 +115,16 @@ function InputForm({ onGenerate, isGenerating }) {
             />
           </div>
           {errors.askingPrice && (
-            <p className="text-red-500 text-sm mt-1">{errors.askingPrice}</p>
+            <p className="text-red-600 text-sm mt-1">{errors.askingPrice}</p>
           )}
         </div>
 
-        {/* Their Offer */}
         <div>
           <label htmlFor="theirOffer" className={labelClasses}>
-            Their offer 🤔
+            Their offer
           </label>
           <div className="relative">
-            <span className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400 font-medium">
+            <span className="absolute left-4 top-1/2 transform -translate-y-1/2 text-stone-400 font-medium">
               $
             </span>
             <input
@@ -142,19 +140,18 @@ function InputForm({ onGenerate, isGenerating }) {
             />
           </div>
           {errors.theirOffer && (
-            <p className="text-red-500 text-sm mt-1">{errors.theirOffer}</p>
+            <p className="text-red-600 text-sm mt-1">{errors.theirOffer}</p>
           )}
         </div>
       </div>
 
-      {/* Minimum Price (Optional) */}
       <div>
         <label htmlFor="minimumPrice" className={labelClasses}>
           Your minimum acceptable price 
-          <span className="text-gray-400 font-normal ml-1">(optional)</span>
+          <span className="text-stone-400 font-normal ml-1">(optional)</span>
         </label>
         <div className="relative">
-          <span className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400 font-medium">
+          <span className="absolute left-4 top-1/2 transform -translate-y-1/2 text-stone-400 font-medium">
             $
           </span>
           <input
@@ -170,41 +167,31 @@ function InputForm({ onGenerate, isGenerating }) {
           />
         </div>
         {errors.minimumPrice && (
-          <p className="text-red-500 text-sm mt-1">{errors.minimumPrice}</p>
+          <p className="text-red-600 text-sm mt-1">{errors.minimumPrice}</p>
         )}
-        <p className="text-gray-400 text-xs mt-1">
+        <p className="text-stone-400 text-xs mt-1">
           The lowest you'd go before walking away
         </p>
       </div>
 
-      {/* Submit Button */}
-      <button
+      <Button
         type="submit"
         disabled={isGenerating}
-        className={`
-          w-full py-4 px-6 rounded-xl font-semibold text-white text-lg
-          transition-all duration-200 
-          ${isGenerating 
-            ? 'bg-primary-400 cursor-not-allowed' 
-            : 'bg-gradient-to-r from-primary-500 to-primary-600 hover:from-primary-600 hover:to-primary-700 active:scale-[0.98] shadow-lg shadow-primary-500/30 hover:shadow-xl hover:shadow-primary-500/40'
-          }
-        `}
+        size="lg"
+        className="w-full"
       >
         {isGenerating ? (
           <span className="flex items-center justify-center gap-2">
-            <svg className="animate-spin h-5 w-5" viewBox="0 0 24 24">
-              <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" fill="none" />
-              <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
-            </svg>
+            <LoaderCircle className="h-5 w-5 animate-spin" aria-hidden="true" />
             Generating...
           </span>
         ) : (
           <span className="flex items-center justify-center gap-2">
-            <span>✨</span>
+            <Sparkles className="h-5 w-5" aria-hidden="true" />
             Generate Responses
           </span>
         )}
-      </button>
+      </Button>
     </form>
   )
 }
