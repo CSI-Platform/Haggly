@@ -1,12 +1,14 @@
-# Haggly Live Product Handoff
+# Unnamed Negotiation Companion Handoff
 
 Last updated: 2026-05-05
 
 ## Current Decision
 
-This workspace should now focus on the current live `haggly.io` product, not the abandoned Haggly v2 concept.
+This workspace should focus on the unnamed new product that grew out of the Haggly v2 work.
 
-The live product is already its own coherent thing:
+The new product is not the current live `haggly.io` site and should not be called "Haggly v2" long term.
+
+## Legacy Haggly.io
 
 - `https://www.haggly.io`
 - Source repo: `https://github.com/StepFatherGoose/haggly`
@@ -14,68 +16,101 @@ The live product is already its own coherent thing:
 - Product shape: cross-language marketplace negotiation phrase tool/PWA.
 - Audience: buyers, sellers, resellers, flippers, travelers, immigrants, and marketplace users crossing language barriers.
 
-Haggly.io should remain Haggly.io: public, fun, useful, sentimental, free-first, and monetized through ads/content rather than a serious SaaS dashboard.
+Haggly.io should remain its own thing: public, fun, useful, sentimental, free-first, and potentially ad-supported later. The user never fully completed its monetization setup and anticipates possibly rebuilding it eventually.
 
-## What The Live Site Actually Is
+Do not let legacy Haggly.io block or define the new product.
 
-Live-site inspection confirmed:
+## New Product Thesis
 
-- 22-language phrase and UI system.
-- Buyer/seller phrase generator.
-- Popular phrases page.
-- Custom translation path.
-- City and marketplace guides.
-- PWA/offline positioning.
-- AdSense metadata and loader.
-- Consent banner.
-- Supabase/Stripe Pro auth and billing code.
-- Pro gating for premium tones, recent phrases, custom translation, and share/listen/SMS/WhatsApp actions.
+The new product is "Grammarly for negotiation."
 
-Key v1 files in `StepFatherGoose/haggly`:
+It is an AI negotiation companion that understands the sales situation, asks pointed clarification questions, and recommends a proven strategy before drafting wording.
 
-- `index.html`
-- `phrases.html`
-- `translations.js`
-- `ui-strings.js`
-- `localize.js`
-- `ads-loader.js`
-- `consent.js`
-- `pro-gating.js`
-- `sw.js`
-- `guides/*`
-- `api/*`
-- `supabase/schema.sql`
+Core loop:
+
+1. User provides deal context.
+2. App extracts the negotiation situation.
+3. App identifies missing information.
+4. App asks concise clarification questions when needed.
+5. App diagnoses leverage and counterpart incentives.
+6. App recommends the next move.
+7. App drafts wording only after the strategy is clear.
+
+The product should feel like a trusted sales/negotiation advisor, not a generic chat app or canned script generator.
+
+## Context Surfaces
+
+Start simple, then expand:
+
+1. Text/paste intake.
+2. Screenshot upload or clipboard image paste.
+3. Browser extension side panel.
+4. Desktop/live-screen context.
+5. Mobile share sheet or native mobile capture.
+
+The Chrome extension is likely a strong eventual interface, but it should not be the first hard dependency. Prove the core intelligence with text and screenshots first.
+
+## Founder Edge
+
+The founder has roughly 10 years of sales experience and direct car sales experience. Use this as the quality bar for prompts and strategy:
+
+- Deal control.
+- Counterpart psychology.
+- Salesperson/dealer tactics.
+- Price anchoring.
+- Concession discipline.
+- Trade-in, financing, add-ons, and urgency pressure.
+- Knowing when to walk.
+
+## Current Repo Starting Point
+
+This repo already has useful starting material:
+
+- React/Vite/Tailwind frontend.
+- Green v2 visual direction.
+- Buyer/seller chat UI.
+- Local conversation dashboard.
+- Mock assistant mode.
+- Prompt playbooks.
+- Negotiation context engine.
+- Vercel `/api/chat` route with OpenAI/Anthropic provider boundary.
+
+Useful files:
+
+- `src/features/chat/*`
+- `src/features/negotiation/negotiationContext.js`
+- `src/lib/ai/*`
+- `src/lib/prompts/promptAssembler.js`
+- `prompts/playbooks/*`
+- `docs/HAGGLY_V2_AGENT_PLAN.md`
 
 ## Product Separation
 
-Do not collapse Haggly.io into the v2 negotiation-chat concept.
-
-Use this separation:
+Keep these products separate:
 
 ### Haggly.io
 
-The current live product. Keep it as:
+Legacy/free phrase and translation product.
 
-- Free cross-language marketplace negotiation phrase app.
-- PWA/offline phrase utility.
-- SEO/content asset.
-- Ad-supported site.
-- Possible lightweight AI-assisted translation/phrase helper later.
+Possible future work:
 
-### Future Negotiation Companion
+- Unlock/remove paywalls.
+- Restore or improve ads.
+- Preserve the cross-language phrase/PWA utility.
+- Rebuild later if needed.
 
-A separate app/project if pursued.
+### Unnamed New Product
 
-Possible concept:
+Main focus for this workspace.
+
+Direction:
 
 - "Grammarly for negotiation."
-- Reads text, screenshots, browser context, and eventually live desktop/mobile context.
-- Asks pointed clarification questions.
-- Diagnoses leverage.
-- Recommends a proven strategy.
-- Drafts wording only after strategy is clear.
-
-It may reuse ideas from Haggly v2, but it should not inherit Haggly.io branding or assumptions unless the user explicitly decides otherwise.
+- AI negotiation companion.
+- Sales-situation understanding.
+- Clarification-first strategy.
+- Screenshot/live-context path.
+- Browser/mobile surfaces later.
 
 ## Reuse Guidance
 
@@ -96,46 +131,48 @@ Do not reuse blindly:
 - Buyer/seller-only route structure.
 - Local dashboard assumptions.
 - Old Pro/paywall assumptions.
-- Anything that makes the live Haggly.io product harder to keep free and simple.
+- Anything that makes the new product feel like a patched version of the legacy site.
 
-## Haggly.io Near-Term Strategy
+## Near-Term Strategy
 
-Near-term work should make the current live product healthier:
+Build the new product around the core intelligence loop before chasing complex capture surfaces.
 
-1. Audit live repo against production.
-2. Remove or unlock Pro paywalls if the goal is free/ad-supported.
-3. Reconcile Pro copy and setup docs. Live Pro says `$1/month`; setup docs mention `$3/month`.
-4. Restore or improve AdSense placement. The loader exists, but obvious ad units need review.
-5. Verify `ads.txt`, consent, CSP, AdSense account metadata, and Search Console basics.
-6. Keep or improve the 22-language phrase database.
-7. Preserve PWA/offline behavior.
-8. Improve marketplace/city guide SEO where useful.
-9. Keep privacy posture simple: no account required for the core product.
+Recommended next build sequence:
+
+1. Rename/reposition the product away from "Haggly v2" in docs and UI.
+2. Keep the current chat shell as the initial surface.
+3. Add structured deal intake and an explicit clarification state.
+4. Add screenshot/image upload to chat.
+5. Extend the model client for multimodal input.
+6. Add output contracts for leverage read, missing info, questions, strategy, and draft.
+7. Test with auto, marketplace, and sales scenarios.
+8. Only after that, design the Chrome side panel extension.
 
 ## Experienced Dev Approach
 
-An experienced developer would not start by rewriting either product.
+An experienced developer would not start with a full rewrite or extension-first build.
 
-They would:
+They would first:
 
-- Freeze the current live site behavior in a short audit.
-- Identify the exact production source repo, hosting target, env vars, analytics, AdSense, and billing dependencies.
-- Decide the business rule first: free/ad-supported vs Pro subscription.
-- Remove only the code paths that conflict with that decision.
-- Keep small reversible branches.
-- Preserve traffic, SEO, URLs, sitemap, robots, and PWA behavior.
-- Verify with smoke tests against production-like pages before deploy.
+- Clarify the product loop and first wedge.
+- Keep the working React/Vite shell if it is serviceable.
+- Extract reusable negotiation logic instead of rewriting.
+- Add screenshot/vision support behind the existing API boundary.
+- Keep branches small and reversible.
+- Create tests around prompt assembly, context extraction, and API payload shape.
+- Avoid over-investing in Chrome/mobile/live-screen capture until text+screenshot strategy feels strong.
 
-The most important difference from a broad AI plan is discipline: treat live Haggly.io like a production asset with real search/traffic history, not a blank canvas.
+The core confidence question is not whether the app can capture context. It can. The hard part is whether it gives better negotiation judgment than a generic chatbot.
 
-## Non-Goals For Haggly.io Work
+## Non-Goals For The Next Task
 
-- Do not turn Haggly.io into the v2 dashboard/chat app.
-- Do not start with a rewrite.
-- Do not break existing URLs.
-- Do not remove language coverage casually.
-- Do not add a new AI backend before the free/ad-supported product direction is cleaned up.
-- Do not build the screenshot/live-screen companion inside Haggly.io yet.
+- Do not work on live Haggly.io unless explicitly asked.
+- Do not rename the legacy site.
+- Do not build the Chrome extension first.
+- Do not build mobile capture first.
+- Do not add accounts, billing, or database until the core loop works.
+- Do not carry over the old Haggly.io Pro/paywall assumptions.
+- Do not treat the current v2 UI as sacred.
 - Do not commit secrets or `.env` files.
 
 ## Cloud Codex Prompt
@@ -148,16 +185,16 @@ You are working in CSI-Platform/Haggly.
 Read AGENTS.md, docs/HAGGLY_V2_AGENT_PLAN.md, and docs/HAGGLY_PIVOT_HANDOFF.md.
 
 Current decision:
-This workspace now revolves around the current live haggly.io product, not the abandoned Haggly v2 concept.
+This workspace should focus on the unnamed new product that grew out of Haggly v2, not on the current live haggly.io site.
 
-Live product:
-haggly.io is a cross-language marketplace negotiation phrase/PWA/content product. Keep it free-first, preserve the live site's SEO/traffic value, and prefer ad-supported monetization over Pro gating.
+Legacy product:
+haggly.io is a separate cross-language marketplace phrase/PWA product. Do not let it define this new product.
 
-Source repo for live site:
-https://github.com/StepFatherGoose/haggly
+New product thesis:
+An AI negotiation companion: "Grammarly for negotiation." It should understand deal context from text first, screenshots soon, and browser/desktop/mobile context later. It should ask pointed clarification questions before recommending a proven strategy, then draft wording only after strategy is clear.
 
 Task:
-Create a concise migration/audit plan for shifting this workspace away from the old Haggly v2 conceptual frame and toward maintaining/improving the live haggly.io product. Include how to inspect the live repo, preserve URLs/SEO/PWA behavior, remove or unlock Pro paywalls safely, and restore AdSense/analytics without a rewrite.
+Create a concise product and technical plan for cleanly splitting the new unnamed negotiation companion from both legacy haggly.io and the old "Haggly v2" framing. Recommend the smallest implementation branch that proves the core loop with text and screenshot intake before Chrome/mobile/live-screen capture.
 
-Do not implement yet unless explicitly asked. Keep the answer practical, production-minded, and grounded in the current live site.
+Do not implement yet unless explicitly asked. Keep the answer practical, product-focused, and grounded in the current repo.
 ```
