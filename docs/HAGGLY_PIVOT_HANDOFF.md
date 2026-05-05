@@ -1,12 +1,14 @@
-# Unnamed Negotiation Companion Handoff
+# Counterpart Handoff
 
 Last updated: 2026-05-05
 
 ## Current Decision
 
-This workspace should focus on the unnamed new product that grew out of the Haggly v2 work.
+This workspace should focus on **Counterpart**, the new product that grew out of the Haggly v2 work.
 
-The new product is not the current live `haggly.io` site and should not be called "Haggly v2" long term.
+Counterpart is not the current live `haggly.io` site and should not be called "Haggly v2" long term.
+
+Naming note: Counterpart is the working product name under CSI-Platform. Quick search found other software and AI-adjacent uses of "Counterpart," including Counterpart Health, Counterpart insurance, Counterpart ERP, and a registered software/SaaS mark. Do not treat the name as legally/domain cleared for standalone public launch without a proper trademark/domain review.
 
 ## Legacy Haggly.io
 
@@ -18,11 +20,11 @@ The new product is not the current live `haggly.io` site and should not be calle
 
 Haggly.io should remain its own thing: public, fun, useful, sentimental, free-first, and potentially ad-supported later. The user never fully completed its monetization setup and anticipates possibly rebuilding it eventually.
 
-Do not let legacy Haggly.io block or define the new product.
+Do not let legacy Haggly.io block or define Counterpart.
 
 ## New Product Thesis
 
-The new product is "Grammarly for negotiation."
+Counterpart is "Grammarly for negotiation."
 
 It is an AI negotiation companion that understands the sales situation, asks pointed clarification questions, and recommends a proven strategy before drafting wording.
 
@@ -36,7 +38,7 @@ Core loop:
 6. App recommends the next move.
 7. App drafts wording only after the strategy is clear.
 
-The product should feel like a trusted sales/negotiation advisor, not a generic chat app or canned script generator.
+Counterpart should feel like a trusted sales/negotiation advisor, not a generic chat app or canned script generator.
 
 ## Context Surfaces
 
@@ -55,7 +57,7 @@ The Chrome extension is likely a strong eventual interface, but it should not be
 The founder has roughly 10 years of sales experience and direct car sales experience. Use this as the quality bar for prompts and strategy:
 
 - Deal control.
-- Counterpart psychology.
+- Counterparty psychology.
 - Salesperson/dealer tactics.
 - Price anchoring.
 - Concession discipline.
@@ -124,7 +126,7 @@ Possible future work:
 - Preserve the cross-language phrase/PWA utility.
 - Rebuild later if needed.
 
-### Unnamed New Product
+### Counterpart
 
 Main focus for this workspace.
 
@@ -156,11 +158,11 @@ Do not reuse blindly:
 - Buyer/seller-only route structure.
 - Local dashboard assumptions.
 - Old Pro/paywall assumptions.
-- Anything that makes the new product feel like a patched version of the legacy site.
+- Anything that makes Counterpart feel like a patched version of the legacy site.
 
 ## Near-Term Strategy
 
-Build the new product around the core intelligence loop before chasing complex capture surfaces.
+Build Counterpart around the core intelligence loop before chasing complex capture surfaces.
 
 Recommended next build sequence:
 
@@ -210,16 +212,16 @@ You are working in CSI-Platform/Haggly.
 Read AGENTS.md, docs/HAGGLY_V2_AGENT_PLAN.md, and docs/HAGGLY_PIVOT_HANDOFF.md.
 
 Current decision:
-This workspace should focus on the unnamed new product that grew out of Haggly v2, not on the current live haggly.io site.
+This workspace should focus on Counterpart, the new product that grew out of Haggly v2, not on the current live haggly.io site.
 
 Legacy product:
 haggly.io is a separate cross-language marketplace phrase/PWA product. Do not let it define this new product.
 
-New product thesis:
-An AI negotiation companion: "Grammarly for negotiation." It should understand deal context from text first, screenshots soon, and browser/desktop/mobile context later. It should ask pointed clarification questions before recommending a proven strategy, then draft wording only after strategy is clear.
+Product thesis:
+Counterpart by CSI-Platform is an AI negotiation companion: "Grammarly for negotiation." It should understand deal context from text first, screenshots soon, and browser/desktop/mobile context later. It should ask pointed clarification questions before recommending a proven strategy, then draft wording only after strategy is clear.
 
 Task:
-Create a concise product and technical plan for cleanly splitting the new unnamed negotiation companion from both legacy haggly.io and the old "Haggly v2" framing. Recommend the smallest implementation branch that proves the core loop with text and screenshot intake before Chrome/mobile/live-screen capture.
+Create a concise product and technical plan for cleanly splitting Counterpart from both legacy haggly.io and the old "Haggly v2" framing. Recommend the smallest implementation branch that proves the core loop with text and screenshot intake before Chrome/mobile/live-screen capture.
 
 Do not implement yet unless explicitly asked. Keep the answer practical, product-focused, and grounded in the current repo.
 ```
