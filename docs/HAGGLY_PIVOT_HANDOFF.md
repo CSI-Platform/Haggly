@@ -84,6 +84,31 @@ Useful files:
 - `prompts/playbooks/*`
 - `docs/HAGGLY_V2_AGENT_PLAN.md`
 
+## Newly Discovered Source Material
+
+Discovered and cloned locally on 2026-05-05:
+
+- Repo: `https://github.com/StepFatherGoose/haggly_v2`
+- Local intake path: `C:\Users\codyl\Desktop\csiOS\DATA-DUMP\GitHub-Intake\StepFatherGoose-haggly_v2`
+- Main app path inside repo: `haggly-v2/`
+
+This is previously unseen material relative to `CSI-Platform/Haggly`. It is a full Next.js 16 / React 19 / Tailwind 4 product line with Supabase auth, deal history, Stripe billing, promo-code Pro gating, i18n routing, Twilio webhook/worker code, and a Chrome MV3 marketplace overlay.
+
+High-value files to review before rebuilding those features:
+
+- `haggly-v2/PROJECT_STATUS.md`
+- `haggly-v2/ANTIGRAVITY_HANDOFF.md`
+- `haggly-v2/src/components/dashboard/chat-interface.tsx`
+- `haggly-v2/src/app/api/negotiate/analyze/route.ts`
+- `haggly-v2/src/app/api/negotiate/generate/logic.ts`
+- `haggly-v2/src/lib/ai/prompts/*`
+- `haggly-v2/src/lib/actions/deals.ts`
+- `haggly-v2/src/app/api/webhooks/twilio/*`
+- `haggly-v2/extension/*`
+- `haggly-v2/supabase/migrations/*`
+
+Use this repo as reference material, not as the new active base by default. The active `CSI-Platform/Haggly` repo is smaller and cleaner for proving the core negotiation loop. Migrate pieces only when they directly support text/screenshot intake, leverage analysis, clarification questions, strategy output, or a later extension surface.
+
 ## Product Separation
 
 Keep these products separate:
