@@ -1,18 +1,20 @@
-# AGENTS.md
+# Repository Instructions
 
 Be concise.
 
 ## Project Context
 
-This workspace should focus on the unnamed new product that grew out of the Haggly v2 work.
+This repository is the canonical CSI-Platform codebase for the active Haggly negotiation product.
 
-Related legacy product:
+Related legacy source lines:
 
 - `https://www.haggly.io`
-- Source repo: `StepFatherGoose/haggly`
+- `StepFatherGoose/haggly`
+- `Octoclaw-ai/haggly`
+- `StepFatherGoose/haggly-1`
 - Product: cross-language marketplace negotiation phrase tool/PWA with guides, translation phrases, AdSense, and legacy Pro gating.
 
-Keep live `haggly.io` conceptually separate. It is a sentimental/free legacy product that may be rebuilt or monetized with ads later, but it is not the main product direction for this workspace.
+Keep legacy Haggly.io conceptually separate from this active product. Legacy code may be reused only when it clearly improves the current app.
 
 Primary direction:
 
@@ -27,6 +29,6 @@ Primary direction:
 
 - Install dependencies with `npm install`.
 - Run locally with `npm run dev`.
-- Verify changes with `npm run build`.
+- Verify with `npm run lint`, `npm run test`, and `npm run build` when relevant.
 - Do not commit secrets or `.env` files.
 - Keep generated build output out of git.

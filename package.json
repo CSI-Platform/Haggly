@@ -2,6 +2,7 @@
   "name": "haggly",
   "private": true,
   "version": "0.1.0",
+  "description": "AI negotiation companion for buyers and sellers.",
   "type": "module",
   "scripts": {
     "dev": "vite",

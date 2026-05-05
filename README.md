@@ -1,12 +1,23 @@
 # Haggly
 
-Private working repo for Haggly v2.
+Canonical CSI-Platform repository for the next-generation Haggly negotiation product.
 
-## Direction
+## Product Direction
 
-Haggly v2 is intended to become a green AI negotiation chat app with a dashboard. This repo currently starts from the old React/Vite prototype in `StepFatherGoose/haggly-1`; the live static site at `www.haggly.io` is a separate v1 line from `StepFatherGoose/haggly`.
+Haggly is becoming an AI negotiation companion: a focused workspace that helps buyers and sellers understand deal context, identify leverage, ask better follow-up questions, and draft the next message with a clear strategy.
 
-## Local Setup
+This repo is the active product line. Older Haggly source material exists in separate legacy repos and exports, but new work should land here.
+
+## Current Capabilities
+
+- React/Vite/Tailwind app shell.
+- Buyer and seller negotiation flows.
+- Local conversation history.
+- Mock assistant mode for local development without API keys.
+- Server-side chat API boundary for OpenAI or Anthropic providers.
+- Prompt playbooks and negotiation context utilities.
+
+## Local Development
 
 ```bash
 npm install
@@ -19,14 +30,23 @@ npm run dev
 npm run build
 ```
 
-## Migration Notes
+## Environment
 
-- Imported from `StepFatherGoose/haggly-1`: React/Vite source, public assets, package files, Tailwind/Vite config, research notes, negotiation script notes.
-- Not imported: `dist/`, `node_modules/`, old `.git` history, and the unused `views/index.ejs` prototype page.
-- Still to evaluate: useful assets/content from the Google Drive `haggly` folder and the current live-site repo.
+Copy `.env.example` to `.env.local` for local API-backed chat. Keep `VITE_HAGGLY_CHAT_MODE=mock` when no model provider is configured.
 
-## Repo Roles
+## Repository Roles
 
-- `CSI-Platform/Haggly`: canonical private v2 repo.
-- `StepFatherGoose/haggly`: current live v1/static site archive.
-- `StepFatherGoose/haggly-1`: old React prototype archive after this repo is stable.
+- `CSI-Platform/Haggly`: canonical active repo for the current product.
+- `StepFatherGoose/haggly`: legacy live/static Haggly.io source line.
+- `Octoclaw-ai/haggly`: early static prototype source line.
+- `StepFatherGoose/haggly-1`: old React prototype source line.
+
+Legacy repos are reference material, not the place for new product work.
+
+## Verification
+
+```bash
+npm run lint
+npm run test
+npm run build
+```
